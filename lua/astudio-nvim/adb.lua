@@ -80,20 +80,17 @@ end
 ---@return nil | string
 function M.resolve_main(device_id, application_id)
   local data = vim
-    .system(
-      {
-        adb,
-        '-s',
-        device_id,
-        'shell',
-        'cmd',
-        'package',
-        'resolve-activity',
-        '--brief',
-        application_id,
-      },
-      { text = true }
-    )
+    .system({
+      adb,
+      '-s',
+      device_id,
+      'shell',
+      'cmd',
+      'package',
+      'resolve-activity',
+      '--brief',
+      application_id,
+    }, { text = true })
     :wait()
 
   if data.code ~= 0 or data.stdout == 'No activity found\n' then

@@ -5,24 +5,30 @@ local M = {
 
 local function create_buf()
   local buf = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_set_option_value("modifiable", false, { buf = buf })
-  vim.api.nvim_set_option_value("buftype", "nofile", { buf = buf })
-  vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf })
+  vim.api.nvim_set_option_value('modifiable', false, { buf = buf })
+  vim.api.nvim_set_option_value('buftype', 'nofile', { buf = buf })
+  vim.api.nvim_set_option_value('bufhidden', 'wipe', { buf = buf })
 
-  vim.api.nvim_buf_set_keymap(buf, "n", "q", "<cmd><cr>", { callback = M.close, desc = "Close Output" })
+  vim.api.nvim_buf_set_keymap(
+    buf,
+    'n',
+    'q',
+    '<cmd><cr>',
+    { callback = M.close, desc = 'Close Output' }
+  )
 
   return buf
 end
 
 local function create_window()
   return vim.api.nvim_open_win(create_buf(), true, {
-    relative = "editor",
-    anchor = "SW",
+    relative = 'editor',
+    anchor = 'SW',
     width = vim.o.columns,
     height = 10,
     col = 0,
     row = vim.o.lines,
-    style = "minimal",
+    style = 'minimal',
   })
 end
 
@@ -48,7 +54,7 @@ function M.new_buf(title)
 
   M.buf = create_buf()
   vim.api.nvim_win_set_buf(M.win_id, M.buf)
-  vim.api.nvim_win_set_config(M.win_id, { title = " " .. title .. " " })
+  vim.api.nvim_win_set_config(M.win_id, { title = ' ' .. title .. ' ' })
   return M.buf
 end
 
