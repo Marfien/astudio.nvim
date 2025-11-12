@@ -3,7 +3,7 @@ name: Ci
 on: [push]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   lint:
