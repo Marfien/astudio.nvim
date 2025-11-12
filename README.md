@@ -33,20 +33,20 @@ return {
 
 ## Commands
 
-- `:Android avd <create|launch|delete>`  
+- `:Android avd <create|launch|delete>` \
   Manages Android Virtual Devices
 
-- `:Android install`
+- `:Android install` \
   Installs the Activity onto an AVD
 
-- `:Android uninstall`
-  Removes the Activity from an AVD
+- `:Android uninstall` \
+  Removes the Activity from an AVD \
   NOTE: Not implemented, yet
 
-- `:Android logcat`
+- `:Android logcat` \
   Attaches to the Activities logs
 
-- `:Android focus`
+- `:Android focus` \
   Focuses the output window again
 
 ## Lua Interface
