@@ -1,33 +1,69 @@
-# nvim-plugin-template
+# astudio.nvim
 
-Neovim plugin template; includes automatic documentation generation from README, integration tests with Busted, and linting with Stylua
+**astudio.nvim** is a Neovim plugin that streamlines Android development by integrating Gradle, Android Virtual Devices (AVD), and Android Debug Bridge (ADB) directly into your editor.
 
-## Usage
+## Features
 
-1. Click `use this template` button generate a repo on your github.
-2. Clone your plugin repo. Open terminal then cd plugin directory.
-3. Run `python3 rename.py your-plugin-name`. This will replace all `nvim-plugin-template` to your `plugin-name`. 
-   Then it will prompt you input `y` or `n` to remove example codes in `init.lua` and
-   `test/plugin_spec.lua`. If you are familiar this repo just input `y`. If you are looking at this template for the first time I suggest you inspect the contents. After this step `rename.py` will also auto-remove.
+- **Gradle Integration:** Run Gradle tasks and view output in Neovim.
+- **AVD Management:** List and start Android Virtual Devices from commands or Lua.
+- **ADB Utilities:** Run ADB commands and interact with devices via commands or Lua.
+- **Command Palette:** Access features via custom Neovim commands.
+- **Lua API:** Programmatically control AVD and ADB from your config or plugins.
 
-Now you have a clean plugin environment. Enjoy!
+NOTE: This plugin does not add support for Kotlin. Please refer to the official [Kotlin Language Server](https://github.com/Kotlin/kotlin-lsp/).
 
-## Format
+## Requirements
 
-The CI uses `stylua` to format the code; customize the formatting by editing `.stylua.toml`.
+- Neovim 0.7
+- `ANDROID_USER_HOME` and `ANSROID_HOME` environment variables set. Please refer to the [official documentation](https://developer.android.com/tools/variables).
+- The `android-commandlinetools` installed (`brew install android-commandlinetools`)
+- Emulator and platform-tools installed (`sdkmanager emutlator platform-tools`)
 
-## Test
+## Installation
 
-See [Running tests locally](https://github.com/nvim-neorocks/nvim-busted-action?tab=readme-ov-file#running-tests-locally)
+### Using [lazy.nvim](https://github.com/folke/lazy.nvim)
 
-## CI
+```lua
+return {
+  'Marfien/astudio.nvim',
+  cmd = "Android",
+  opts = {},
+}
+```
 
-- Auto generates doc from README.
-- Runs the [nvim-busted-action](https://github.com/nvim-neorocks/nvim-busted-action) for test.
-- Lints with `stylua`.
+## Commands
 
-## More
+- `:Android avd <create|launch|delete>`  
+  Manages Android Virtual Devices
 
-To see this template in action, take a look at my other plugins.
+- `:Android install`
+  Installs the Activity onto an AVD
 
-## License MIT
+- `:Android uninstall`
+  Removes the Activity from an AVD
+  NOTE: Not implemented, yet
+
+- `:Android logcat`
+  Attaches to the Activities logs
+
+- `:Android focus`
+  Focuses the output window again
+
+## Lua Interface
+
+There is a shallow wrapper around the AVD and ADB CLI tools:
+
+```lua
+local avd = require('astudio-nvim.avd')
+local adb = require('astudio-nvim.adb')
+```
+
+All functions within are annotated with type hints. The names should speak for them self.
+
+## Contributing
+
+Issues and pull requests are welcome!
+
+## License
+
+MIT License. See [LICENSE](./LICENSE) for details.
