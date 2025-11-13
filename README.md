@@ -28,6 +28,10 @@ return {
   'Marfien/astudio.nvim',
   cmd = "Android",
   opts = {},
+  init = function()
+    vim.env.ANDROID_USER_HOME = vim.env.XDG_CONFIG_HOME .. "/android/"
+    vim.env.ANDROID_HOME = "..."
+  end
 }
 ```
 
