@@ -45,7 +45,7 @@ function M.uninstall(device_id, application_id)
 end
 
 ---Returns a stream of log messages from the device
----@param device util.android.adb.DeviceData
+---@param device util.adb.DeviceData
 ---@param debug_tags? string[]
 function M.logcat(device, debug_tags)
   local cmd = {
@@ -68,7 +68,7 @@ function M.logcat(device, debug_tags)
     table.insert(cmd, x)
   end
 
-  require('astudio-nvim.android.util').exec_out(
+  require('astudio-nvim.util').exec_out(
     cmd,
     'Logcat: ' .. device.name .. ' (' .. vim.fn.join(filter) .. ')'
   )
@@ -139,12 +139,12 @@ local function get_device_names(ids)
   return devices
 end
 
----@class util.android.adb.DeviceData
+---@class util.adb.DeviceData
 ---@field id string
 ---@field name string
 
 ---Gets the currently running devices from adb
----@return util.android.adb.DeviceData[]
+---@return util.adb.DeviceData[]
 function M.get_running_devices()
   local devices = get_adb_devices()
   local names = get_device_names(devices)

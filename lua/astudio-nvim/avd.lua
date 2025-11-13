@@ -82,7 +82,7 @@ function M.list_images(callback)
 
       local packages = {}
       for image in data.stdout:gmatch('(system%-images;.-)%s') do
-        if not require('astudio-nvim.android.util').table_contains(packages, image) then
+        if not require('astudio-nvim.util').table_contains(packages, image) then
           table.insert(packages, image)
         end
       end
